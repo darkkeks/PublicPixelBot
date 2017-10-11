@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Pixel Bot
+// @name         Pixel Bot Tj Version
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  try to take over the world!
