@@ -16,7 +16,7 @@ function PixelBot() {
     PixelBot.pts = 30;
     PixelBot.tc = "rgb(0, 0, 0)";
 
-    PixelBot.doCoordLog = false;
+    PixelBot.doCoordLog = true;
 
     PixelBot.url = {
         script: function() {
