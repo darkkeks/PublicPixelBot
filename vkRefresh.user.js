@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         VkRefresh
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  try to take over the world!
 // @author       You
 // @match        https://vk.com/*
@@ -11,7 +11,7 @@
 (function() {
     'use strict';
 
-    setTimeout(function(){
+    window.alert = function(data) {
         location.reload();
-    }, 600000);
+    };
 })();
