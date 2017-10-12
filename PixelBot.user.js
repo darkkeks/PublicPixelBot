@@ -15,7 +15,7 @@ function MyPixelBot() {
 
     MyPixelBot.url = {
         script: 'https://raw.githubusercontent.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js',
-        image:  'http://i.imgur.com/SWRNmEX.png'
+        image:  'https://i.imgur.com/aXAuFsS.png'
     };
 
     MyPixelBot.refreshTime = 300;
