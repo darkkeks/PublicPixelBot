@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         Pixel Bot
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.1
 // @description  try to take over the world!
 // @author       Flyink13, DarkKeks
 // @match        https://pixel.vkforms.ru/*
-// @downloadURL  https://rawgit.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js
-// @updateURL    https://rawgit.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js
+// @downloadURL  https://github.com/DarkKeks/PublicPixelBot/blob/master/PixelBot.user.js
+// @updateURL    https://github.com/DarkKeks/PublicPixelBot/blob/master/PixelBot.user.js
 // @grant        none
 // ==/UserScript==
 
@@ -14,7 +14,7 @@ function MyPixelBot() {
     window.MyPixelBot = MyPixelBot;
 
     MyPixelBot.url = {
-        script: 'https://rawgit.com/DarkKeks/PublicPixelBot/master/PixelBot.uer.js',
+        script: 'https://github.com/DarkKeks/PublicPixelBot/blob/master/PixelBot.user.js',
         image:  'http://i.imgur.com/SWRNmEX.png'
     };
 
@@ -119,7 +119,7 @@ function MyPixelBot() {
         };
 
         var pxColor = MyPixelBot.getColor(MyPixelBot.ctx.getImageData(x, y + 1, 1, 1).data, 0);
-        var colorEl = document.querySelector('[style="background-color: ' + color + ';"]');
+        var colorEl = document.querySelectorAll('[style="background-color: ' + color + ';"]')[0];
         if (!colorEl) {
             console.log("color error %c " + color, 'background:' + color + ';');
             MyPixelBot.setState("Ошибка подбора цвета " + color);
@@ -147,7 +147,7 @@ function MyPixelBot() {
         MyPixelBot.canvasEvent("click", q);
         q.button = 0;
         MyPixelBot.canvasEvent("mouseup", q);
-        document.querySelector(".App__confirm button").click();
+        document.querySelectorAll(".App__confirm button")[0].click();
     };
 
     MyPixelBot.draw = function() {
@@ -190,7 +190,8 @@ function MyPixelBot() {
 
     MyPixelBot.getFullData = function() {
         MyPixelBot.pixs = [];
-        MyPixelBot.pixs = MyPixelBot.randomShuffle(MyPixelBot.getData(0));
+        MyPixelBot.pixs = MyPixelBot.randomShuffle(MyPixelBot.getData(0)
+            .concat(MyPixelBot.getData(795)));
         MyPixelBot.setState("осталось точек:" + MyPixelBot.pixs.length);
         return MyPixelBot.pixs.length;
     };
@@ -243,13 +244,13 @@ function MyPixelBot() {
         if(MyPixelBot.debug)
             debugger;
         if (window.localStorage.getItem('DROP_FIRST_TIME') != '1') {
-            document.querySelector(".App__advance > .Button.primary").click();
+            document.querySelectorAll(".App__advance > .Button.primary")[0].click();
         } else if (window.localStorage.getItem('DROP_HEADER') != '1') {
-            document.querySelector(".Header__close").click();
+            document.querySelectorAll(".Header__close")[0].click();
         } else if (!MyPixelBot.inited && MyPixelBot.canvas) {
             MyPixelBot.ctx = MyPixelBot.canvas.getContext("2d");
             MyPixelBot.init();
-        } else if (MyPixelBot.canvas && document.querySelector(".Ttl > .Ttl__wait")) {
+        } else if (MyPixelBot.canvas && document.querySelectorAll(".Ttl > .Ttl__wait").length) {
             MyPixelBot.timer = 1;
         } else if (!MyPixelBot.canvas) {
             var all = document.querySelectorAll("canvas");
