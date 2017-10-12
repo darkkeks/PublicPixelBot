@@ -13,7 +13,7 @@
 function MyAwesomePixelBot() {
     window.MyAwesomePixelBot = MyAwesomePixelBot;
     MyAwesomePixelBot.url = {
-        script: 'https://rawgit.com/DarkKeks/PublicPixelBot/master/MyAwesomePixelBot.user.js',
+        script: 'https://rawgit.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js',
         image: 'https://i.imgur.com/5W9M4bZ.png'
     };
     MyAwesomePixelBot.refreshTime = 300;
