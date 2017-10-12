@@ -5,8 +5,8 @@
 // @description  try to take over the world!
 // @author       Flyink13, DarkKeks
 // @match        https://pixel.vkforms.ru/*
-// @downloadURL  https://github.com/DarkKeks/PublicPixelBot/blob/master/PixelBot.user.js
-// @updateURL    https://github.com/DarkKeks/PublicPixelBot/blob/master/PixelBot.user.js
+// @downloadURL  https://raw.githubusercontent.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js
+// @updateURL    https://raw.githubusercontent.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js
 // @grant        none
 // ==/UserScript==
 
@@ -14,7 +14,7 @@ function MyPixelBot() {
     window.MyPixelBot = MyPixelBot;
 
     MyPixelBot.url = {
-        script: 'https://github.com/DarkKeks/PublicPixelBot/blob/master/PixelBot.user.js',
+        script: 'https://raw.githubusercontent.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js',
         image:  'http://i.imgur.com/SWRNmEX.png'
     };
 
