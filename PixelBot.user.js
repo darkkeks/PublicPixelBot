@@ -295,8 +295,11 @@ if (window.loaded) {
         (document.body || document.head || document.documentElement).appendChild(script);
     };
 
-    //if (document.readyState == 'complete') inject();
-    window.addEventListener("load", function() {
+    if (document.readyState == 'complete') {
         inject();
-    });
+    } else {
+        window.addEventListener("load", function() {
+            inject();
+        });
+    }
 }
