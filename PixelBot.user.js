@@ -101,10 +101,12 @@ function MyPixelBot() {
     };
 
     MyPixelBot.canvasClick = function(x, y, color) {
+        var offset = 0;
         MyPixelBot.resetZoom();
         if (x > 795) {
             MyPixelBot.canvasMoveTo(795, 0);
-            x = x - 795;
+            offset = 795;
+            x = x - offset;
         } else {
             MyPixelBot.canvasMoveTo(0, 0);
         }
@@ -126,8 +128,8 @@ function MyPixelBot() {
             return;
         } else if (pxColor == color) {
             if(MyPixelBot.doCoordLog) {
-                console.log("== " + x + "x" + y + "%c " + pxColor, 'background:' + pxColor + ';');
-                MyPixelBot.setState("Пропускаю " + (x + 1) + "x" + (y + 1) + " совпал цвет");
+                console.log("== " + x + offset  + "x" + y + "%c " + pxColor, 'background:' + pxColor + ';');
+                MyPixelBot.setState("Пропускаю " + (x + offset + 1) + "x" + (y + 1) + " совпал цвет");
             } else {
                 console.log("==");
                 MyPixelBot.setState("Пропускаю, совпал цвет");
@@ -135,8 +137,8 @@ function MyPixelBot() {
             return;
         } else {
             if(MyPixelBot.doCoordLog) {
-                console.log(x + "x" + y + "%c " + pxColor + " -> %c " + color, 'background:' + pxColor + ';', 'background:' + color + ';');
-                MyPixelBot.setState("Поставил точку " + (x + 1) + "x" + (y + 1));
+                console.log(x + offset  + "x" + y + "%c " + pxColor + " -> %c " + color, 'background:' + pxColor + ';', 'background:' + color + ';');
+                MyPixelBot.setState("Поставил точку " + (x + offset + 1) + "x" + (y + 1));
             } else {
                 console.log(" -> ");
                 MyPixelBot.setState("Поставил точку");
