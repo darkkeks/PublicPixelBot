@@ -21,7 +21,7 @@ function CoiPixelBot() {
     CoiPixelBot.refreshTime = 300;
 
     CoiPixelBot.pts = 30;
-    CoiPixelBot.tc = "rgb(0, 0, 0)";
+    CoiPixelBot.tc = "rgb(17, 17, 17)";
 
     CoiPixelBot.height = 400;
     CoiPixelBot.widht = 1590;
