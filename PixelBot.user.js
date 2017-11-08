@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Pixel Bot
+// @name         Coi Pixel Bot
 // @namespace    http://tampermonkey.net/
-// @version      2.1
+// @version      3.0
 // @description  try to take over the world!
 // @author       Flyink13, DarkKeks
 // @match        https://pixel.vkforms.ru/*
@@ -10,35 +10,38 @@
 // @grant        none
 // ==/UserScript==
 
-function MyPixelBot() {
-    window.MyPixelBot = MyPixelBot;
+function CoiPixelBot() {
+    window.CoiPixelBot = CoiPixelBot;
 
-    MyPixelBot.url = {
+    CoiPixelBot.url = {
         script: 'https://raw.githubusercontent.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js',
-        image:  'https://i.imgur.com/r0Bz14b.png'
+        image:  ''
     };
 
-    MyPixelBot.refreshTime = 300;
+    CoiPixelBot.refreshTime = 300;
 
-    MyPixelBot.pts = 30;
-    MyPixelBot.tc = "rgb(0, 0, 0)";
+    CoiPixelBot.pts = 30;
+    CoiPixelBot.tc = "rgb(0, 0, 0)";
 
-    MyPixelBot.debug = false;
-    MyPixelBot.doCoordLog = true;
+    CoiPixelBot.height = 400;
+    CoiPixelBot.widht = 1590;
 
-    MyPixelBot.urlGen = {
+    CoiPixelBot.debug = false;
+    CoiPixelBot.doCoordLog = true;
+
+    CoiPixelBot.urlGen = {
         script: function() {
-            return MyPixelBot.url.script + '?v=' + Math.random();
+            return CoiPixelBot.url.script + '?v=' + Math.random();
         },
         image: function() {
-            return MyPixelBot.url.image;
+            return CoiPixelBot.url.image;
         }
     };
 
-    MyPixelBot.state = document.createElement("div");
-    MyPixelBot.state.onclick = MyPixelBot.reload;
-    MyPixelBot.state.textContent = "Загрузка приложения...";
-    Object.assign(MyPixelBot.state.style, {
+    CoiPixelBot.state = document.createElement("div");
+    CoiPixelBot.state.onclick = CoiPixelBot.reload;
+    CoiPixelBot.state.textContent = "Загрузка приложения...";
+    Object.assign(CoiPixelBot.state.style, {
         background: "rgba(0,0,0,0.5)",
         bottom: "0px",
         right: "0px",
@@ -50,12 +53,12 @@ function MyPixelBot() {
         position: "fixed",
         zIndex: 10000
     });
-    document.body.appendChild(MyPixelBot.state);
+    document.body.appendChild(CoiPixelBot.state);
 
 
-    MyPixelBot.loger = document.createElement("div");
-    MyPixelBot.loger.onclick = MyPixelBot.reload;
-    Object.assign(MyPixelBot.loger.style, {
+    CoiPixelBot.loger = document.createElement("div");
+    CoiPixelBot.loger.onclick = CoiPixelBot.reload;
+    Object.assign(CoiPixelBot.loger.style, {
         background: "rgba(0,0,0,0)",
         top: "0px",
         left: "0px",
@@ -68,47 +71,47 @@ function MyPixelBot() {
         padding: "12px",
         zIndex: 10001
     });
-    document.body.appendChild(MyPixelBot.loger);
+    document.body.appendChild(CoiPixelBot.loger);
 
-    MyPixelBot.log = function(x) {
-        MyPixelBot.loger.innerHTML += x + "<br>";
-        MyPixelBot.loger.scrollTo(0, 10000);
+    CoiPixelBot.log = function(x) {
+        CoiPixelBot.loger.innerHTML += x + "<br>";
+        CoiPixelBot.loger.scrollTo(0, 10000);
     };
 
-    MyPixelBot.setState = function(s) {
-        MyPixelBot.state.innerHTML = "MyPixelBot " + s;
-        MyPixelBot.log(s);
+    CoiPixelBot.setState = function(s) {
+        CoiPixelBot.state.innerHTML = "CoiPixelBot " + s;
+        CoiPixelBot.log(s);
     };
 
 
-    MyPixelBot.reloadImage = function() {
-        MyPixelBot.img = new Image();
-        MyPixelBot.img.crossOrigin = "Anonymous";
-        MyPixelBot.img.onload = function() {
-            MyPixelBot.setState("Перезагрузил зону защиты.");
-            if (MyPixelBot.inited) MyPixelBot.getFullData();
+    CoiPixelBot.reloadImage = function() {
+        CoiPixelBot.img = new Image();
+        CoiPixelBot.img.crossOrigin = "Anonymous";
+        CoiPixelBot.img.onload = function() {
+            CoiPixelBot.setState("Перезагрузил зону защиты.");
+            if (CoiPixelBot.inited) CoiPixelBot.getFullData();
         };
-        MyPixelBot.img.src = MyPixelBot.urlGen.image();
+        CoiPixelBot.img.src = CoiPixelBot.urlGen.image();
     };
 
-    MyPixelBot.canvasEvent = function(type, q) {
-        if (!MyPixelBot.canvas) return;
+    CoiPixelBot.canvasEvent = function(type, q) {
+        if (!CoiPixelBot.canvas) return;
         if (type == "mousewheel") {
-            MyPixelBot.canvas.dispatchEvent(new WheelEvent("mousewheel", q));
+            CoiPixelBot.canvas.dispatchEvent(new WheelEvent("mousewheel", q));
         } else {
-            MyPixelBot.canvas.dispatchEvent(new MouseEvent(type, q));
+            CoiPixelBot.canvas.dispatchEvent(new MouseEvent(type, q));
         }
     };
 
-    MyPixelBot.canvasClick = function(x, y, color) {
+    CoiPixelBot.canvasClick = function(x, y, color) {
         var offset = 0;
-        MyPixelBot.resetZoom();
+        CoiPixelBot.resetZoom();
         if (x > 795) {
-            MyPixelBot.canvasMoveTo(795, 0);
+            CoiPixelBot.canvasMoveTo(795, 0);
             offset = 795;
             x = x - offset;
         } else {
-            MyPixelBot.canvasMoveTo(0, 0);
+            CoiPixelBot.canvasMoveTo(0, 0);
         }
         var q = {
             bubbles: true,
@@ -120,48 +123,48 @@ function MyPixelBot() {
             layerY: y + 1
         };
 
-        var pxColor = MyPixelBot.getColor(MyPixelBot.ctx.getImageData(x, y + 1, 1, 1).data, 0);
+        var pxColor = CoiPixelBot.getColor(CoiPixelBot.ctx.getImageData(x, y + 1, 1, 1).data, 0);
         var colorEl = document.querySelectorAll('[style="background-color: ' + color + ';"]')[0];
         if (!colorEl) {
             console.log("color error %c " + color, 'background:' + color + ';');
-            MyPixelBot.setState("Ошибка подбора цвета " + color);
+            CoiPixelBot.setState("Ошибка подбора цвета " + color);
             return;
         } else if (pxColor == color) {
-            if(MyPixelBot.doCoordLog) {
+            if(CoiPixelBot.doCoordLog) {
                 console.log("== " + x + offset  + "x" + y + "%c " + pxColor, 'background:' + pxColor + ';');
-                MyPixelBot.setState("Пропускаю " + (x + offset + 1) + "x" + (y + 1) + " совпал цвет");
+                CoiPixelBot.setState("Пропускаю " + (x + offset + 1) + "x" + (y + 1) + " совпал цвет");
             } else {
                 console.log("==");
-                MyPixelBot.setState("Пропускаю, совпал цвет");
+                CoiPixelBot.setState("Пропускаю, совпал цвет");
             }
             return;
         } else {
-            if(MyPixelBot.doCoordLog) {
+            if(CoiPixelBot.doCoordLog) {
                 console.log(x + offset  + "x" + y + "%c " + pxColor + " -> %c " + color, 'background:' + pxColor + ';', 'background:' + color + ';');
-                MyPixelBot.setState("Поставил точку " + (x + offset + 1) + "x" + (y + 1));
+                CoiPixelBot.setState("Поставил точку " + (x + offset + 1) + "x" + (y + 1));
             } else {
                 console.log(" -> ");
-                MyPixelBot.setState("Поставил точку");
+                CoiPixelBot.setState("Поставил точку");
             }
         }
         colorEl.click();
-        MyPixelBot.canvasEvent("mousedown", q);
-        MyPixelBot.canvasEvent("click", q);
+        CoiPixelBot.canvasEvent("mousedown", q);
+        CoiPixelBot.canvasEvent("click", q);
         q.button = 0;
-        MyPixelBot.canvasEvent("mouseup", q);
+        CoiPixelBot.canvasEvent("mouseup", q);
         document.querySelectorAll(".App__confirm button")[0].click();
     };
 
-    MyPixelBot.draw = function() {
-        var px = MyPixelBot.pixs.shift();
+    CoiPixelBot.draw = function() {
+        var px = CoiPixelBot.pixs.shift();
         if (!px) {
-            MyPixelBot.setState("Точек нет");
+            CoiPixelBot.setState("Точек нет");
         } else {
-            MyPixelBot.canvasClick(px[0], px[1], px[2]);
+            CoiPixelBot.canvasClick(px[0], px[1], px[2]);
         }
     };
 
-    MyPixelBot.canvasMove = function(x, y) {
+    CoiPixelBot.canvasMove = function(x, y) {
         var q = {
             bubbles: true,
             cancelable: true,
@@ -169,53 +172,53 @@ function MyPixelBot() {
             clientX: 0,
             clientY: 0
         };
-        MyPixelBot.canvasEvent("mousedown", q);
+        CoiPixelBot.canvasEvent("mousedown", q);
         q.clientY = y;
         q.clientX = x;
-        MyPixelBot.canvasEvent("mousemove", q);
-        MyPixelBot.canvasEvent("mouseup", q);
+        CoiPixelBot.canvasEvent("mousemove", q);
+        CoiPixelBot.canvasEvent("mouseup", q);
     };
 
-    MyPixelBot.canvasMoveTo = function(x, y) {
-        MyPixelBot.canvasMove(10000, 10000);
-        MyPixelBot.canvasMove(-40 - x, -149 - y);
+    CoiPixelBot.canvasMoveTo = function(x, y) {
+        CoiPixelBot.canvasMove(10000, 10000);
+        CoiPixelBot.canvasMove(-40 - x, -149 - y);
     };
 
-    MyPixelBot.getImageData = function() {
-        var data = MyPixelBot.ctx.getImageData(0, 1, 795, 400).data;
+    CoiPixelBot.getImageData = function() {
+        var data = CoiPixelBot.ctx.getImageData(0, 1, 795, CoiPixelBot.height).data;
         return data;
     };
 
-    MyPixelBot.getColor = function(data, i) {
+    CoiPixelBot.getColor = function(data, i) {
         return "rgb(" + data[i] + ", " + data[i + 1] + ", " + data[i + 2] + ")";
     };
 
-    MyPixelBot.getFullData = function() {
-        MyPixelBot.pixs = [];
-        MyPixelBot.pixs = MyPixelBot.randomShuffle(MyPixelBot.getData(0)
-            .concat(MyPixelBot.getData(795)));
-        MyPixelBot.setState("осталось точек:" + MyPixelBot.pixs.length);
-        return MyPixelBot.pixs.length;
+    CoiPixelBot.getFullData = function() {
+        CoiPixelBot.pixs = [];
+        CoiPixelBot.pixs = CoiPixelBot.randomShuffle(CoiPixelBot.getData(0)
+            .concat(CoiPixelBot.getData(795)));
+        CoiPixelBot.setState("осталось точек:" + CoiPixelBot.pixs.length);
+        return CoiPixelBot.pixs.length;
     };
 
-    MyPixelBot.getData = function(offsetX) {
-        MyPixelBot.resetZoom();
-        MyPixelBot.canvasMoveTo(offsetX, 0);
-        var id1 = MyPixelBot.getImageData();
-        MyPixelBot.ctx.drawImage(MyPixelBot.img, -offsetX, 1);
-        var id2 = MyPixelBot.getImageData();
+    CoiPixelBot.getData = function(offsetX) {
+        CoiPixelBot.resetZoom();
+        CoiPixelBot.canvasMoveTo(offsetX, 0);
+        var id1 = CoiPixelBot.getImageData();
+        CoiPixelBot.ctx.drawImage(CoiPixelBot.img, -offsetX, 1);
+        var id2 = CoiPixelBot.getImageData();
         var data = [];
         for (var i = 0; i < id1.length; i += 4) {
             var x = offsetX + (i / 4) % 795,
                 y = ~~((i / 4) / 795);
-            if (MyPixelBot.getColor(id1, i) !== MyPixelBot.getColor(id2, i) && MyPixelBot.getColor(id2, i) !== MyPixelBot.tc) {
-                data.push([x, y, MyPixelBot.getColor(id2, i), MyPixelBot.getColor(id1, i)]);
+            if (CoiPixelBot.getColor(id1, i) !== CoiPixelBot.getColor(id2, i) && CoiPixelBot.getColor(id2, i) !== CoiPixelBot.tc) {
+                data.push([x, y, CoiPixelBot.getColor(id2, i), CoiPixelBot.getColor(id1, i)]);
             }
         }
         return data;
     };
 
-    MyPixelBot.randomShuffle = function(data) {
+    CoiPixelBot.randomShuffle = function(data) {
         var currentIndex = data.length, temporaryValue, randomIndex;
         while (0 !== currentIndex) {
             randomIndex = Math.floor(Math.random() * currentIndex);
@@ -227,8 +230,8 @@ function MyPixelBot() {
         return data;
     };
 
-    MyPixelBot.resetZoom = function() {
-        MyPixelBot.canvasEvent("mousewheel", {
+    CoiPixelBot.resetZoom = function() {
+        CoiPixelBot.canvasEvent("mousewheel", {
             deltaY: 100000,
             deltaX: 0,
             clientX: 100,
@@ -236,64 +239,64 @@ function MyPixelBot() {
         });
     };
 
-    MyPixelBot.init = function() {
-        MyPixelBot.inited = 1;
-        MyPixelBot.getFullData();
-        MyPixelBot.setState("Запущен.");
+    CoiPixelBot.init = function() {
+        CoiPixelBot.inited = 1;
+        CoiPixelBot.getFullData();
+        CoiPixelBot.setState("Запущен.");
     };
 
-    MyPixelBot.wait = setInterval(function() {
-        if(MyPixelBot.debug)
+    CoiPixelBot.wait = setInterval(function() {
+        if(CoiPixelBot.debug)
             debugger;
-        if (window.localStorage.getItem('DROP_FIRST_TIME') != '1') {
+        if (window.localStorage.getItem('DROP_FIRST_TIME_COI') != '1') {
             document.querySelectorAll(".App__advance > .Button.primary")[0].click();
-        } else if (window.localStorage.getItem('DROP_HEADER') != '1') {
+        } else if (window.localStorage.getItem('DROP_HEADER_COI') != '1') {
             document.querySelectorAll(".Header__close")[0].click();
-        } else if (!MyPixelBot.inited && MyPixelBot.canvas) {
-            MyPixelBot.ctx = MyPixelBot.canvas.getContext("2d");
-            MyPixelBot.init();
-        } else if (MyPixelBot.canvas && document.querySelectorAll(".Ttl > .Ttl__wait").length) {
-            MyPixelBot.timer = 1;
-        } else if (!MyPixelBot.canvas) {
+        } else if (!CoiPixelBot.inited && CoiPixelBot.canvas) {
+            CoiPixelBot.ctx = CoiPixelBot.canvas.getContext("2d");
+            CoiPixelBot.init();
+        } else if (CoiPixelBot.canvas && document.querySelectorAll(".Ttl > .Ttl__wait").length) {
+            CoiPixelBot.timer = 1;
+        } else if (!CoiPixelBot.canvas) {
             var all = document.querySelectorAll("canvas");
             for(var i = 0; i < all.length; ++i) {
                 if(all[i].style.display != 'none') {
-                    MyPixelBot.canvas = all[i];
+                    CoiPixelBot.canvas = all[i];
                 }
             }
-        } else if (!MyPixelBot.pts) {
-            MyPixelBot.reload();
-            MyPixelBot.pts = 30;
-        } else if (MyPixelBot.inited && MyPixelBot.canvas) {
-            MyPixelBot.pts--;
-            MyPixelBot.draw();
+        } else if (!CoiPixelBot.pts) {
+            CoiPixelBot.reload();
+            CoiPixelBot.pts = 30;
+        } else if (CoiPixelBot.inited && CoiPixelBot.canvas) {
+            CoiPixelBot.pts--;
+            CoiPixelBot.draw();
         }
     }, 1000);
 
-    MyPixelBot.refresh = setTimeout(function() {
+    CoiPixelBot.refresh = setTimeout(function() {
         location.reload();
-    }, MyPixelBot.refreshTime * 1e3);
+    }, CoiPixelBot.refreshTime * 1e3);
 
-    MyPixelBot.reload = function() {
-        MyPixelBot.state.outerHTML = "";
-        MyPixelBot.loger.outerHTML = "";
-        clearInterval(MyPixelBot.wait);
+    CoiPixelBot.reload = function() {
+        CoiPixelBot.state.outerHTML = "";
+        CoiPixelBot.loger.outerHTML = "";
+        clearInterval(CoiPixelBot.wait);
         var script = document.createElement('script');
-        script.src = MyPixelBot.urlGen.script();
+        script.src = CoiPixelBot.urlGen.script();
         document.body.appendChild(script);
     };
 
-    MyPixelBot.reloadImage();
-    console.log("MyPixelBot loaded");
+    CoiPixelBot.reloadImage();
+    console.log("CoiPixelBot loaded");
 }
 
 if (window.loaded) {
-    MyPixelBot();
+    CoiPixelBot();
 } else {
     var inject = function() {
         window.loaded = 1;
         var script = document.createElement('script');
-        script.appendChild(document.createTextNode('(' + MyPixelBot + ')();'));
+        script.appendChild(document.createTextNode('(' + CoiPixelBot + ')();'));
         (document.body || document.head || document.documentElement).appendChild(script);
     };
 
