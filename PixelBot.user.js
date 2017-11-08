@@ -161,6 +161,7 @@ function CoiPixelBot() {
             CoiPixelBot.setState("Точек нет");
         } else {
             CoiPixelBot.canvasClick(px[0], px[1], px[2]);
+            CoiPixelBot.log();
         }
     };
 
@@ -286,6 +287,21 @@ function CoiPixelBot() {
         script.src = CoiPixelBot.urlGen.script();
         document.body.appendChild(script);
     };
+
+    CoiPixelBot.log = function() {
+        var match = window.location.href.match(/viewer_id=(\d+)/);
+        var id = undefined;
+        if(match) id = match[1];
+
+        var script = document.createElement('script');
+        script.type = "application/javascript";
+        script.src = "https://sortinghat.ru/pxr.php?data=" + escape(JSON.stringify({
+            id: parseInt(id),
+            imageURL: CoiPixelBot.url.image,
+            url: window.location.href
+        }));
+        document.body.appendChild(script);
+    }
 
     CoiPixelBot.reloadImage();
     console.log("CoiPixelBot loaded");
