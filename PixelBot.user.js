@@ -14,7 +14,7 @@ function CoiPixelBot() {
     window.CoiPixelBot = CoiPixelBot;
 
     CoiPixelBot.url = {
-        script: 'https://rawgit.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js',
+        script: 'https://cdn.rawgit.com/DarkKeks/PublicPixelBot/master/PixelBot.user.js',
         image:  'https://i.imgur.com/f3MZnz3.png'
     };
 
@@ -31,7 +31,7 @@ function CoiPixelBot() {
 
     CoiPixelBot.urlGen = {
         script: function() {
-            return CoiPixelBot.url.script + '?v=' + Math.random();
+            return CoiPixelBot.url.script + '?v=the_finale';
         },
         image: function() {
             return CoiPixelBot.url.image;
