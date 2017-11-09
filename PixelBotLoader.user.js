@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixel Bot Loader
 // @namespace    http://tampermonkey.net/
-// @version      1.9
+// @version      2.0
 // @description  try to take over the world!
 // @author       DarkKeks
 // @match        https://pixel.vkforms.ru/*
