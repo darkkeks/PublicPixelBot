@@ -196,9 +196,9 @@ function CoiPixelBot() {
 
     CoiPixelBot.getFullData = function() {
         CoiPixelBot.pixs = [];
-        // CoiPixelBot.pixs = CoiPixelBot.randomShuffle(CoiPixelBot.getData(0)
-        //     .concat(CoiPixelBot.getData(795)));
-        CoiPixelBot.pixs = CoiPixelBot.getData(0).concat(CoiPixelBot.getData(795));
+         CoiPixelBot.pixs = CoiPixelBot.randomShuffle(CoiPixelBot.getData(0)
+             .concat(CoiPixelBot.getData(795)));
+        //CoiPixelBot.pixs = CoiPixelBot.getData(0).concat(CoiPixelBot.getData(795));
         CoiPixelBot.setState("осталось точек:" + CoiPixelBot.pixs.length);
         return CoiPixelBot.pixs.length;
     };

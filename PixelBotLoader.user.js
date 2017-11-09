@@ -10,7 +10,7 @@
 // @grant        none
 // ==/UserScript==
 
-window.botUrl = "https://cdn.rawgit.com/DarkKeks/PublicPixelBot/8b0d73e5/PixelBot.user.js";
+window.botUrl = "https://cdn.rawgit.com/DarkKeks/PublicPixelBot/047352e/PixelBot.user.js";
 
 var inject = function() {
     console.log("Injecting");
