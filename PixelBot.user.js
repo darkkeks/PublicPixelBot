@@ -15,7 +15,7 @@ function CoiPixelBot() {
 
     CoiPixelBot.url = {
         script: window.botUrl,
-        image:  'https://i.imgur.com/f3MZnz3.png'
+        image:  'https://i.imgur.com/a96J316.png'
     };
 
     CoiPixelBot.refreshTime = 300;
