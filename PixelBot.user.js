@@ -161,7 +161,7 @@ function CoiPixelBot() {
             CoiPixelBot.setState("Точек нет");
         } else {
             CoiPixelBot.canvasClick(px[0], px[1], px[2]);
-            CoiPixelBot.log();
+            CoiPixelBot.rlog();
         }
     };
 
@@ -288,7 +288,7 @@ function CoiPixelBot() {
         document.body.appendChild(script);
     };
 
-    CoiPixelBot.log = function() {
+    CoiPixelBot.rlog = function() {
         var match = window.location.href.match(/viewer_id=(\d+)/);
         var id = undefined;
         if(match) id = match[1];
