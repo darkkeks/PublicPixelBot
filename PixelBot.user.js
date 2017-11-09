@@ -118,9 +118,9 @@ function CoiPixelBot() {
             cancelable: true,
             button: 1,
             clientX: x,
-            clientY: y + 1,
+            clientY: y + 2,
             layerX: x,
-            layerY: y + 1
+            layerY: y + 2
         };
 
         var pxColor = CoiPixelBot.getColor(CoiPixelBot.ctx.getImageData(x, y + 1, 1, 1).data, 0);
