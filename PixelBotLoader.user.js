@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixel Bot Loader
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.1
 // @description  try to take over the world!
 // @author       DarkKeks
 // @match        https://pixel.vkforms.ru/*
@@ -10,7 +10,7 @@
 // @grant        none
 // ==/UserScript==
 
-window.botUrl = "https://cdn.rawgit.com/DarkKeks/PublicPixelBot/c95d043c/PixelBot.user.js";
+window.botUrl = "https://cdn.rawgit.com/DarkKeks/PublicPixelBot/52b400d4/PixelBot.user.js";
 
 var inject = function() {
     console.log("Injecting");
