@@ -268,12 +268,12 @@ function CoiPixelBot() {
             }
         } else if (!CoiPixelBot.pts) {
             CoiPixelBot.reload();
-            CoiPixelBot.pts = 30;
+            CoiPixelBot.pts = 100;
         } else if (CoiPixelBot.inited && CoiPixelBot.canvas) {
             CoiPixelBot.pts--;
             CoiPixelBot.draw();
         }
-    }, 1000);
+    }, 1e3 / 2);
 
     CoiPixelBot.refresh = setTimeout(function() {
         location.reload();
